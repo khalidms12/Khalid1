@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>پڕۆفیسۆر د. خالد ئەحمەد</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="lang-switch">
+    <button onclick="switchLang('ku')">کوردی</button>
+    <button onclick="switchLang('ar')">عربي</button>
+  </div>
+
+  <div class="container">
+    <h1 id="title"></h1>
+    <div id="faq-container"></div>
+  </div>
+
+  <script src="data.json"></script>
+  <script>
+    const content = {
+      ku: {
+        title: "پەیامە فقهییەکان",
+        data: faq_ku
+      },
+      ar: {
+        title: "الأسئلة الشرعية",
+        data: faq_ar
+      }
+    };
+
+    function switchLang(lang) {
+      document.getElementById('title').innerText = content[lang].title;
+      const faqContainer = document.getElementById('faq-container');
+      faqContainer.innerHTML = '';
+      content[lang].data.forEach(faq => {
+        faqContainer.innerHTML += `
+          <div class="question">❓ ${faq.q}</div>
+          <div class="answer">🔹 ${faq.a}</div>
+        `;
+      });
+    }
+
+    // default language
+    switchLang('ku');
+  </script>
+</body>
+</html>
